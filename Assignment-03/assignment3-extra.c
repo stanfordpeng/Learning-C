@@ -4,14 +4,14 @@
 int main(void)
 {
   //initialize vars
-  char *first;
-  char *last;
+  char *first = malloc(100 * sizeof(char));
+  char *last = = malloc(100 * sizeof(char));
 
   //prompt user to input first and last name and use scanf() to store those to the initiliazed vars
   printf("Enter your first name: ");
-  scanf("%ms", &first);
+  scanf("%ms", first);
   printf("Enter your last name: ");
-  scanf("%ms", &last);
+  scanf("%ms", last);
 
   //print the welcome message!
   printf("Hello %s %s!\n", first, last);
