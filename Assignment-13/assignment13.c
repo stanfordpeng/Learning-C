@@ -1,69 +1,44 @@
+// Create a program that prompts the user to input scoring totals for 5 players during 4 basketball games. 
+// The program will track which player had the highest scoring average over the 4 games and print the result to the terminal.
+
+// Hint: Use a two-dimensional array and nested for loops. 
+// The outer-most for loop will iterate on a per game basis gathering scores for the inner-most for loop interating through players. 
+// Use this same model to create arrays to store total scores and to calculate averages.
+
+// Extra Credit: There is none. This one is pretty hard!
+
 #include <stdio.h>
 
+int main(){
+    // int scores[5][4]; // 5 players, 4 games
+    int total_scores[5] = {0}; // Total scores for each player
+    float averages[5] = {0.0}; // Average scores for each player
 
-int main(void) 
-{
-	//declare constant vars for these values
-	const int games = 4;
-	const int players = 5;
+    // Input scores
+    for (int game = 0; game < 4; game++) {
+        printf("Enter scores for Game %d:\n", game + 1);
+        for (int player = 0; player < 5; player++) {
+            printf("Player %d: ", player + 1);
+            int tmp = 0;
+            scanf("%d", &tmp);
+            total_scores[player] += tmp;
+        }
+    }
 
-	//declare two-dimensional array to store scores for 5 players over 4 games;
-	//declare float array to store our totals for each player later
-	int scores[4][5];
-	int totals[5];
-	int highest_total;
+    // Calculate averages
+    for (int player = 0; player < 5; player++) {
+        averages[player] = (float)total_scores[player] / 4;
+    }
 
-	//we need an outer for loop counter and an inner for loop counter;
-	int game_counter, player_counter;
+    // Find the player with the highest average
+    int highest_player = 0;
+    for (int i = 1; i < 5; i++) {
+        if (averages[i] > averages[highest_player]) {
+            highest_player = i;
+        }
+    }
 
-	//start outer loop (4 games)
-	for (game_counter = 0; game_counter < games; game_counter++)
-	{
-		printf("Game #%d\n", (game_counter + 1));
+    printf("Player %d had the highest scoring average: %.2f\n", highest_player + 1, averages[highest_player]);
 
-		//start inner loop for each player (5 players)
-		for (player_counter = 0; player_counter < players; player_counter++)
-		{
-			printf("Enter scoring total for Player #%d: ", (player_counter + 1));
-
-			//put the score into the scores array
-			scanf("%d", &scores[game_counter][player_counter]);
-		}
-	}
-
-	//create a loop to iterate through each player game by game to create their point totals
-	for (player_counter = 0; player_counter < players; player_counter++)
-	{
-		int player_total = 0;
-		for (game_counter = 0; game_counter < games; game_counter++)
-		{
-			//this player's total will be added to by each game total for the player in the scores array
-			player_total += scores[game_counter][player_counter];
-		}
-		//we begin populating the totals array we initialized earlier with each player's total before moving onto the next player
-		totals[player_counter] = player_total;
-	}
-
-	//now we'll create the highest total of 0 to start, and if we iterate through the totals array
-	//each total in the array that's higher than the previous highest, will be come the new highest
-	highest_total = 0;
-	int player_id;
-	for (player_counter = 0; player_counter < players; player_counter++)
-	{
-		if (totals[player_counter] > highest_total)
-		{
-			highest_total = totals[player_counter];
-			
-			//this player_id variable will help us keep track of who the current leader is in points
-			player_id = (player_counter + 1);
-		}
-	}
-
-	//initialize a new float variable which will be our average
-	//use the (float) operator to change the integer variable being divided into a float operation
-	float ppg = (float)(highest_total / 4);
-	printf("Player #%d had the highest scoring average at %.2f points per game.\n", player_id, ppg);
-	
-	return 0;
-
+    return 0;
 }
