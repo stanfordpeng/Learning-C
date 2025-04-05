@@ -61,7 +61,7 @@ tokyo:~/LearningC/ # gcc assignment25.c -o assignment25
 tokyo:~/LearningC/ # ./assignment25                                          
 The open operation succeeded!#      
 tokyo:~/LearningC/ # cat testfile.txt                   
-Writing test data to the file#
+Writing test data to the file.
 ```
 Awesome, now to build in some error handling. The codewiki page tells us that the return value is the number of bytes we wrote to the file, so we know that if we don't get a `30` return value, our operation didn't succeed. Let's add some logic to save the return value in the variable `writertn` and return a `-1` if it fails. 
 
@@ -90,7 +90,7 @@ int main (void)
 
 	int writertn;
 
-	writertn = write(filedescriptor, "Writing test data to the file", 30);
+	writertn = write(filedescriptor, "Writing test data to the file.", 30);
 
 	if (writertn != 30)
 	{
