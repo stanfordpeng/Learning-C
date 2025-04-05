@@ -21,7 +21,7 @@ int main (void)
 
 	int writertn;
 
-	writertn = write(filedescriptor, "Writing test data to the file", 30);
+	writertn = write(filedescriptor, "Writing test data to the file.", 30);
 
 	if (writertn != 30)
 	{
